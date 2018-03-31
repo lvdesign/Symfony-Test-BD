@@ -1,0 +1,30 @@
+{# src/OC/CoreBundle/Resources/view/Core/index.html.twig #}
+
+{% extends "OCCoreBundle::layout.html.twig" %}
+
+{% block title %}
+  Page d'accueil du site - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+  <h2>Accueil du site OC </h2>
+  
+
+  <h3>Dernières annonces</h3>
+  {# recuperation des annonces #}
+  <div class="accueil-annonces">
+  {{ render (controller("OCPlatformBundle:Advert:menu", {'limit': 3})) }}
+  </div>
+
+  <hr>
+
+  <div class="center-block" >
+  <a class="btn btn-info btn-lg active" href="{{ path('oc_core_contact') }}">Contact</a>
+  {# Affiche message Flash Contact #}
+  {% for message in app.session.flashbag.get('info') %}
+    <p class="bg-info text-primary txt-info"> Message flash : {{ message }}</p>
+  {% endfor %}
+</div>
+
+{% endblock %}
